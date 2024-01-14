@@ -10,8 +10,8 @@ const roomTypes = [
     value: "luxuary",
   },
   {
-    title: "Deluxe",
-    value: "deluxe",
+    title: "Suite",
+    value: "suite",
   },
 ];
 
@@ -138,6 +138,13 @@ const hotelRoom = {
       name: "isBooked",
       type: "boolean",
       title: "Is Booked?",
+      validation: (Rule) => Rule.required(),
+      initialValue: false,
+    }),
+    defineField({
+      name: "isFeatured",
+      type: "boolean",
+      title: "Is Featured?",
       validation: (Rule) => Rule.required(),
       initialValue: false,
     }),

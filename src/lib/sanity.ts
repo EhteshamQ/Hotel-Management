@@ -1,4 +1,4 @@
-import { createClient } from "next-sanity";
+import { createClient } from "@sanity/client";
 
 const sanityClient = createClient({
   projectId: process.env.NEXT_PUBLIC_PROJECT_ID,

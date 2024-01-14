@@ -32,6 +32,18 @@ const user = {
       hidden: true,
     }),
     defineField({
+      name: "email",
+      type: "string",
+      title: "Email",
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: "emailVerified",
+      type: "boolean",
+      hidden: true,
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
       name: "about",
       type: "text",
       title: "About",
