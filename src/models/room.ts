@@ -35,3 +35,15 @@ export type Room = {
   type: string;
   isBooked: boolean;
 };
+
+export type CreateBookingDTO = {
+  user: string;
+  hotelRoom: string;
+  checkInDate: string;
+  checkOutDate: string;
+  adults: number;
+  children: number;
+  totalPrice: number;
+  discount: number;
+  numberOfDays: number;
+};
