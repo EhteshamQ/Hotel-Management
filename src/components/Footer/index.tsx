@@ -5,7 +5,7 @@ import { BiMessageDetail } from "react-icons/bi";
 const Footer = () => {
   return (
     <footer className="mt-16 ">
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-10">
         <Link href="/" className="font-black text-tertiary-dark">
           Hotelx
         </Link>

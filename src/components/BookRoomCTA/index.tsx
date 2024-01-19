@@ -203,7 +203,7 @@ const BookRoomCTA: FC<BookRoomCTAProps> = ({
         disabled={isBooked}
         className="btn-primary w-full mt-6 disabled:bg-gray-500 disabled:cursor-not-allowed"
       >
-        {isBooked ? "Not Available" : "Book Now"}
+        {isBooked ? "Booked" : "Book Now"}
       </button>
     </div>
   );

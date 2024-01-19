@@ -45,5 +45,32 @@ export type CreateBookingDTO = {
   children: number;
   totalPrice: number;
   discount: number;
-  numberOfDays: number;
+  numberofDays: number;
+};
+
+export type Booking = {
+  _id: string;
+  hotelRoom: {
+    _id: string;
+    name: string;
+    slug: { current: string };
+    price: string;
+  };
+  checkinDate: Date;
+  checkoutDate: Date;
+  numberofDays: number;
+  adults: number;
+  children: number;
+  totalPrice: number;
+  discount: number;
+};
+
+export type User = {
+  _id: string;
+  name: string;
+  email: string;
+  isAdmin: boolean;
+  about: string;
+  _createdAt: String;
+  image: string;
 };
