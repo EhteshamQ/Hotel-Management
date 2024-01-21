@@ -1,7 +1,7 @@
 "use client";
 import { getStripe } from "@/lib/stripe";
 import axios from "axios";
-import { FC, useState } from "react";
+import { FC } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import toast from "react-hot-toast";

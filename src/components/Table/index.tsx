@@ -1,6 +1,6 @@
 "use client";
 
-import { Booking } from "@/models/room";
+import { Booking } from "@/models/booking";
 import { useRouter } from "next/navigation";
 import { Dispatch, FC, SetStateAction } from "react";
 

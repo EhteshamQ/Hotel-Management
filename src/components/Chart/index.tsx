@@ -1,6 +1,6 @@
 "use client";
 
-import { Booking } from "@/models/room";
+import { Booking } from "@/models/booking";
 import { FC } from "react";
 import {
   Chart as ChartJs,
