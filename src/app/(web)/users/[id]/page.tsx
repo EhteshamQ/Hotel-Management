@@ -1,7 +1,7 @@
 "use client";
 
 import { getUserBookings } from "@/lib/api";
-import { User } from "@/models/room";
+import { User } from "@/models/user";
 import axios from "axios";
 import Image from "next/image";
 import { FC, useState } from "react";
@@ -10,6 +10,11 @@ import useSWR from "swr";
 import LoadingSpinner from "../../loading";
 import { signOut } from "next-auth/react";
 import { BsJournalBookmarkFill } from "react-icons/bs";
+import { GiMoneyStack } from "react-icons/gi";
+import Table from "@/components/Table";
+import Chart from "@/components/Chart";
+import RatingModal from "@/components/RatingModal";
+import toast from "react-hot-toast";
 
 type UserProfileType = {
   params: { id: string };
@@ -41,6 +46,49 @@ const UserProfile: FC<UserProfileType> = ({ params: { id } }) => {
     "bookings" | "amount" | "ratings"
   >("bookings");
 
+  const [roomId, setRoomId] = useState<string | null>(null);
+  const [ratingModelOpen, setIsRatingModelOpen] = useState<boolean>(false);
+  const [rating, setRating] = useState<number>(0);
+  const [reviewText, setReviewText] = useState<string>("");
+  const [submittingReview, setSubmittingReview] = useState<boolean>(false);
+  const onSubmitReview = async () => {
+    if (reviewText?.trim().length == 0) {
+      toast.error("Please add some comment");
+      return;
+    }
+    if (rating == 0) {
+      toast.error("Please add a rating(1-5)");
+      return;
+    }
+    if (!roomId) {
+      toast.error("Id not provided");
+      return;
+    }
+    try {
+      setSubmittingReview(true);
+      const reviewSaved = await axios.post("/api/users", {
+        roomId,
+        rating,
+        reviewText,
+      });
+      if (reviewSaved.status == 200) {
+        toast.success("Review Successful");
+        return;
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error(
+        "There was an error while saving your review, Please try again later"
+      );
+    } finally {
+      setRating(0);
+      setIsRatingModelOpen(false);
+      setRoomId(null);
+      setSubmittingReview(false);
+      setReviewText("");
+    }
+  };
+  // Error & loading conditions
   if (loadingBookings || userDataLoading) return <LoadingSpinner />;
   if (bookingError || userDataError)
     throw new Error("Error while fetching room details");
@@ -122,8 +170,48 @@ const UserProfile: FC<UserProfileType> = ({ params: { id } }) => {
                 </a>
               </li>
             </ol>
+            <ol
+              className={`${
+                currentNav === "amount" ? "text-blue-600" : "text-gray-700"
+              } inline-flex mr-1 md:mr-5 items-center space-x-1 md:space-x-3`}
+            >
+              <li
+                className="inline-flex items-center cursor-pointer"
+                onClick={() => setCurrentNav("amount")}
+              >
+                <GiMoneyStack />
+                <a className="inline-flex items-center mx-1 md:mx03 text-xs md:text-sm font-medium">
+                  Amount Spent
+                </a>
+              </li>
+            </ol>
           </nav>
+
+          {currentNav === "bookings"
+            ? bookingData && (
+                <Table
+                  bookingDetails={bookingData}
+                  setRoomId={setRoomId}
+                  setIsRatingModalOpen={setIsRatingModelOpen}
+                />
+              )
+            : null}
+
+          {currentNav === "amount" ? (
+            <Chart bookingDetails={bookingData} />
+          ) : null}
         </div>
+        <RatingModal
+          open={ratingModelOpen}
+          onClose={() => setIsRatingModelOpen(false)}
+          rating={rating}
+          setRating={setRating}
+          reviewText={reviewText}
+          setReviewText={setReviewText}
+          onSubmitReview={onSubmitReview}
+          submittingReview={submittingReview}
+          setSubmittingReview={setSubmittingReview}
+        />
       </div>
     </div>
   );

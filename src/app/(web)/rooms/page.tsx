@@ -66,7 +66,7 @@ const Rooms = () => {
         query={searchQuery}
         handleRoomTypeChange={setRoomTypeFilter}
       />
-      <div className="flex mt-20 justify-start flex-wrap gap-24">
+      <div className="flex mt-20 justify-start flex-wrap gap-20">
         {filteredRooms.map((room) => (
           <RoomCard room={room} key={room._id} />
         ))}

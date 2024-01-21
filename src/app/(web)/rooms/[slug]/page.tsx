@@ -10,6 +10,7 @@ import LoadingSpinner from "../../loading";
 import { AiOutlineMedicineBox } from "react-icons/ai";
 import { GiSmokeBomb } from "react-icons/gi";
 import BookRoomCTA from "@/components/BookRoomCTA";
+import Reviews from "@/components/Reviews";
 
 type RoomDetailsType = {
   params: { slug: string };
@@ -110,7 +111,7 @@ const RoomDetails: FC<RoomDetailsType> = ({ params }) => {
                   <p className="md:text-lg font-semibold">Customer Reviews</p>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {/*Reviews*/}
+                  <Reviews roomId={room._id} />
                 </div>
               </div>
             </div>

@@ -20,7 +20,7 @@ const review = {
       validation: (Rule) => Rule.required(),
     }),
     defineField({
-      name: "review",
+      name: "reviewText",
       title: "Review",
       type: "text",
       validation: (Rule) => Rule.required(),
