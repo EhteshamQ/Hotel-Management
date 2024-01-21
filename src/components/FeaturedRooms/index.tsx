@@ -8,6 +8,8 @@ type FeatureRoomProps = {
 };
 
 const FeaturedRooms: FC<FeatureRoomProps> = ({ featuredRoom }) => {
+  const imagesCopy = [...featuredRoom.images];
+
   return (
     <section className="flex md:flex-row flex-col px-4 py-10 items-center gap-12 container mx-auto">
       <div className="md:grid gap-6 grid-cols-1">
@@ -21,7 +23,7 @@ const FeaturedRooms: FC<FeatureRoomProps> = ({ featuredRoom }) => {
           />
         </div>
         <div className="md:grid grid-cols-2 gap-8 h-48">
-          {featuredRoom.images.toSpliced(1, 2).map((image) => (
+          {imagesCopy.splice(1, 2).map((image) => (
             <div
               key={image._key}
               className="rounded-2xl overflow-hidden h-48  mb-4 md:mb-0"
