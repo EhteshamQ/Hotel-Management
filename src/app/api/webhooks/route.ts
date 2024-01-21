@@ -1,5 +1,5 @@
 import { createBooking, updateHotelRoom } from "@/lib/api";
-import { CreateBookingDTO } from "@/models/room";
+import { CreateBookingDTO } from "@/models/booking";
 import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
 
